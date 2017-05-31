@@ -10,8 +10,12 @@ import com.niit.entertainment_backend.model.Suppliermodel;
 public interface Supplierdao {
 
 	List<Suppliermodel> getAllSupplierDetails();
-    Suppliermodel getSupplierDetails(String id);
+    Suppliermodel getSupplierDetails(int id);
 	void updateSupplierDetails(Suppliermodel obj);
 	void addSupplierDetails(Suppliermodel obj);
+	
+	
+	List<Suppliermodel> getAllCategoryDetails();
+	
 
 }

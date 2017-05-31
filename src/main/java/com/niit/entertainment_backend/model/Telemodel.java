@@ -4,8 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="ProductDetails",uniqueConstraints = {
-		@UniqueConstraint(columnNames = "prod_Id")})
+@Table(name="ProductDetails")
 public class Telemodel implements Serializable
 {
 	/**
@@ -13,57 +12,66 @@ public class Telemodel implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue
 	@Column(name="prod_Id")
-	private String prodId;
-	@Column(name="prod_Brand")
-	private String prodBrand;
+	private int prodId;
+	/*@Column(name="prod_Brand")
+	private String prodBrand;*/ 
 	@Column(name="prod_Name")
 	private String prodName;
 	@Column(name="prod_Description")
 	private String prodDescription;
 	@Column(name="prod_Price")
 	private int prodPrice;
-	@Column(name="prod_Quantity")
-	private int prodQuantity;
+	/*@Column(name="prod_Quantity")
+	private int prodQuantity;*/
 	@ManyToOne
 	@JoinColumn(name="category_Id")
 	private Categorymodel prodCategory;
 	@ManyToOne
-	@JoinColumn(name="SupplierId")
+	@JoinColumn(name="supplier_Id")
 	private Suppliermodel prodSupplier;
+	@Column(name="image") private String image;
 	
 	public Telemodel()
 	{
 		
 	}
+	
 
-	public Telemodel(String prodId, String prodBrand, String prodName, String prodDescription, int prodPrice,
-			int prodQuantity, Categorymodel prodCategory, Suppliermodel prodSupplier) {
+	
+
+	public Telemodel(int prodId, String prodName, String prodDescription, int prodPrice, Categorymodel prodCategory,
+			Suppliermodel prodSupplier, String image) {
 		super();
 		this.prodId = prodId;
-		this.prodBrand = prodBrand;
 		this.prodName = prodName;
 		this.prodDescription = prodDescription;
 		this.prodPrice = prodPrice;
-		this.prodQuantity = prodQuantity;
 		this.prodCategory = prodCategory;
 		this.prodSupplier = prodSupplier;
+		this.image = image;
 	}
 
-	public String getProdId() {
+
+
+
+	public String getImage() {
+		return image;
+	}
+
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+
+	public int getProdId() {
 		return prodId;
 	}
 
-	public void setProdId(String prodId) {
+	public void setProdId(int prodId) {
 		this.prodId = prodId;
-	}
-
-	public String getProdBrand() {
-		return prodBrand;
-	}
-
-	public void setProdBrand(String prodBrand) {
-		this.prodBrand = prodBrand;
 	}
 
 	public String getProdName() {
@@ -90,14 +98,6 @@ public class Telemodel implements Serializable
 		this.prodPrice = prodPrice;
 	}
 
-	public int getProdQuantity() {
-		return prodQuantity;
-	}
-
-	public void setProdQuantity(int prodQuantity) {
-		this.prodQuantity = prodQuantity;
-	}
-
 	public Categorymodel getProdCategory() {
 		return prodCategory;
 	}
@@ -114,11 +114,6 @@ public class Telemodel implements Serializable
 		this.prodSupplier = prodSupplier;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-
-	
-	
+		
 	
 }

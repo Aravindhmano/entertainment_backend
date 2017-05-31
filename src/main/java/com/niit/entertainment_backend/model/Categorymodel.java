@@ -8,14 +8,14 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="CategoryDetails",uniqueConstraints = {
-		@UniqueConstraint(columnNames = "category_Id")})
+@Table(name="CategoryDetails")
 public class Categorymodel implements Serializable
 {
 	/**
@@ -23,11 +23,12 @@ public class Categorymodel implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@GeneratedValue
 	@Column(name="category_Id")
-	private String categoryId;
+	private int categoryId;
 	@Column(name="category_Name")
 	private String categoryName;
-	@OneToMany(mappedBy = "prodCategory",cascade=CascadeType.ALL,fetch = FetchType.LAZY)
+	@OneToMany(targetEntity=Telemodel.class, mappedBy = "prodCategory",cascade=CascadeType.ALL,fetch = FetchType.EAGER)
 	@Column(name="category_Products")
 	private Set<Telemodel> categoryProducts;/*=new HashSet<Telemodel>(0);*/
 
@@ -36,18 +37,18 @@ public class Categorymodel implements Serializable
 		super();
 	}
 
-	public Categorymodel(String categoryId, String categoryName, Set<Telemodel> categoryProducts) {
+	public Categorymodel(int categoryId, String categoryName, Set<Telemodel> categoryProducts) {
 		super();
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 		this.categoryProducts = categoryProducts;
 	}
 
-	public String getCategoryId() {
+	public int getCategoryId() {
 		return categoryId;
 	}
 
-	public void setCategoryId(String categoryId) {
+	public void setCategoryId(int categoryId) {
 		this.categoryId = categoryId;
 	}
 
@@ -67,9 +68,7 @@ public class Categorymodel implements Serializable
 		this.categoryProducts = categoryProducts;
 	}
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	
 	
 	
 }

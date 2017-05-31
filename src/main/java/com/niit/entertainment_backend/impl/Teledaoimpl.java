@@ -4,28 +4,52 @@ package com.niit.entertainment_backend.impl;
 
 import java.util.List;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
 import com.niit.entertainment_backend.dao.Teledao;
 import com.niit.entertainment_backend.model.Telemodel;
 
 
 
-
+@Repository
 public class Teledaoimpl implements Teledao
 {
 
+	@Autowired
+	SessionFactory sessionFactory;
+	
 	public List<Telemodel> getAllProductDetails() {
 		// TODO Auto-generated method stub
-		return null;
+		Session sf=sessionFactory.openSession();
+		sf.beginTransaction();
+		Query query=sf.createQuery("From Telemodel");
+		List<Telemodel> list1=query.list();
+		System.out.println(list1);
+		sf.getTransaction().commit();
+		return list1;
 	}
-	public Telemodel getProductDetail(String id) {
+	public Telemodel getProductDetail(int id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
 	public void updateProductDetails(Telemodel obj) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void addProduct(Telemodel obj) {
+	public void addProduct(Telemodel obj) 
+	{
+		System.out.println("In Add Product");
+		Session s=sessionFactory.openSession();
+		s.beginTransaction();
+		s.save(obj);
+		s.getTransaction().commit();
+		s.close();
+		
 		// TODO Auto-generated method stub
 		
 	}

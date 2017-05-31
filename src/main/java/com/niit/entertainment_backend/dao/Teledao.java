@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public interface Teledao
 {
 	List<Telemodel> getAllProductDetails();
-    Telemodel getProductDetail(String id);
+    Telemodel getProductDetail(int id);
 	void updateProductDetails(Telemodel obj);
 	void addProduct(Telemodel obj);
 }

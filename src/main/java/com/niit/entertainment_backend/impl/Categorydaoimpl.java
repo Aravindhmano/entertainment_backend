@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,19 +24,32 @@ public class Categorydaoimpl implements Categorydao {
 
 	public List<Categorymodel> getAllCategoryDetails() {
 		// TODO Auto-generated method stub
-		Session session=sessionFactory.openSession();
+		Session sf =sessionFactory.openSession();
+		sf.beginTransaction();
+		Query query = sf.createQuery("from Categorymodel");
+		List<Categorymodel> list=query.list();
+		System.out.println(list);
+		sf.getTransaction().commit();
+		return list;
+		
+	}
+		
+		
+	/*	Session session=sessionFactory.openSession();
 		List<Categorymodel> category=null;
 		session.beginTransaction();
 		category=session.createQuery("from Categorymodel").list();
 		session.getTransaction().commit();
 	
 		
-		return category ;
-	}
+		return category ;*/
 
-	public Categorymodel getCategoryDetails(String id) {
+
+	public Categorymodel getCategoryDetails(int id)
+	{
+		Categorymodel c=(Categorymodel)sessionFactory.openSession().get(Categorymodel.class, id);
 		// TODO Auto-generated method stub
-		return null;
+		return c;
 	}
 
 	public void updateCategoryDetails(Categorymodel obj) {

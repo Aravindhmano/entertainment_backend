@@ -10,7 +10,7 @@ import com.niit.entertainment_backend.model.Categorymodel;
 public interface Categorydao {
 
 	List<Categorymodel> getAllCategoryDetails();
-    Categorymodel getCategoryDetails(String id);
+    Categorymodel getCategoryDetails(int id);
 	void updateCategoryDetails(Categorymodel obj);
 	void addCategoryDetails(Categorymodel obj);
 

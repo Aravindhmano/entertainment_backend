@@ -15,13 +15,14 @@ public class Suppliermodel implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-@Id
+  @Id
+  @GeneratedValue
   @Column(name="supplier_Id")
-  private String supplierId;
+  private int supplierId;
   @Column(name="supplier_Name")
   private String supplierName;
   @Column(name="supplier_products")
-  @OneToMany(fetch = FetchType.LAZY, mappedBy = "prodId")
+  @OneToMany(targetEntity=Telemodel.class, fetch = FetchType.LAZY, mappedBy = "prodSupplier", cascade=CascadeType.ALL)
   private Set<Telemodel> supplierproducts=new HashSet<Telemodel>(0);
   
   
@@ -31,7 +32,7 @@ public Suppliermodel() {
 	super();
 }
 
-public Suppliermodel(String supplierId, String supplierName) {
+public Suppliermodel(int supplierId, String supplierName) {
 	super();
 	this.supplierId = supplierId;
 	this.supplierName = supplierName;
@@ -44,11 +45,11 @@ public Suppliermodel(String supplierId, String supplierName) {
 	this.supplierproducts = supplierproducts;
 }*/
 
-public String getSupplierId() {
+public int getSupplierId() {
 	return supplierId;
 }
 
-public void setSupplierId(String supplierId) {
+public void setSupplierId(int supplierId) {
 	this.supplierId = supplierId;
 }
 
